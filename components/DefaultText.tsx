@@ -10,5 +10,6 @@ export default function DefaultText(props: any) {
 const styles = StyleSheet.create({
   text: {
     fontFamily: "Bangers_400Regular",
+    fontSize: 20,
   },
 });

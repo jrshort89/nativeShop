@@ -12,7 +12,7 @@ export default function Home({ navigation }: HomeNavProps<"Home">) {
           width: "100%",
         }}
       >
-        <ItemList />
+        <ItemList {...navigation} />
       </View>
     </View>
   );
@@ -24,9 +24,5 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     width: "100%",
-  },
-  text: {
-    fontSize: 22,
-    color: "red",
   },
 });

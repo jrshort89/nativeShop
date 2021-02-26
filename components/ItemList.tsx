@@ -3,11 +3,19 @@ import { FlatList, StyleSheet, View } from "react-native";
 import ItemCard from "./ItemCard";
 import dummyData from "../data/dummy-data";
 import Product from "../models/product";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
-export default function ItemList() {
+export default function ItemList(props: any) {
   const itemList = (data: any) => {
     return (
-      <ItemCard title={data.item.title} description={data.item.description} />
+      <ItemCard
+        price={data.item.price}
+        title={data.item.title}
+        description={data.item.description}
+        imageUrl={data.item.imageUrl}
+        item={data.item}
+        {...props}
+      />
     );
   };
   return (
@@ -28,6 +36,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    margin: 10,
+    marginHorizontal: 10,
   },
 });
