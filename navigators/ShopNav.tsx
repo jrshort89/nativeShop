@@ -27,6 +27,7 @@ const HomeNav = () => {
         component={ItemDetail}
         options={stackOptions}
       />
+      <Stack.Screen name="Cart" component={Cart} options={stackOptions} />
     </Stack.Navigator>
   );
 };
@@ -47,7 +48,7 @@ const ShopNav = () => {
         <Drawer.Screen
           name={"Cart"}
           component={Cart}
-          options={{ headerTitle: "Cart" }}
+          options={{ headerTitle: "cart" }}
         />
       </Drawer.Navigator>
     </NavigationContainer>

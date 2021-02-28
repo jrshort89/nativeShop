@@ -1,9 +1,12 @@
 import React from "react";
 import { View, StyleSheet, Button, Image, Alert } from "react-native";
 import DefaultText from "./DefaultText";
+import { useDispatch } from "react-redux";
+import * as actionTypes from "../redux/actions/cartActions";
 
 export default function ItemDetail(props: any) {
   const { title, price, description, imageUrl } = props.route.params;
+  const dispatch = useDispatch();
   return (
     <View style={styles.screen}>
       <DefaultText style={styles.text}>{title}</DefaultText>
@@ -16,7 +19,9 @@ export default function ItemDetail(props: any) {
         <DefaultText>{description}</DefaultText>
       </DefaultText>
       <Button
-        onPress={() => Alert.alert("You basically just bought a " + title)}
+        onPress={() =>
+          dispatch(actionTypes.addItemToCart(props.route.params, 1))
+        }
         title="Purchase"
       />
     </View>

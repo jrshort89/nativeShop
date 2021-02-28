@@ -12,7 +12,7 @@ export interface addItemToCart {
 export interface removeItemFromCart {
   type: typeof REMOVE_ITEM_FROM_CART;
   item: CartItem;
-  quantity: number;
+  removeQuantity: number;
 }
 
 export type CartActionTypes = addItemToCart | removeItemFromCart;

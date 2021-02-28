@@ -3,7 +3,6 @@ import { FlatList, StyleSheet, View } from "react-native";
 import ItemCard from "./ItemCard";
 import dummyData from "../data/dummy-data";
 import Product from "../models/product";
-import { TouchableOpacity } from "react-native-gesture-handler";
 
 export default function ItemList(props: any) {
   const itemList = (data: any) => {

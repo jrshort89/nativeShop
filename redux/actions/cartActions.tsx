@@ -12,9 +12,8 @@ export const addItemToCart = (item: Product, quantity: number): AppActions => ({
   quantity: quantity,
 });
 
-export const removeItemFromCart = (item: CartItem) => ({
+export const removeItemFromCart = (item: CartItem, quantity: number) => ({
   type: REMOVE_ITEM_FROM_CART,
   item,
-  quantity: item.quantity,
-  sum: item.sum,
+  removeQuantity: quantity,
 });
