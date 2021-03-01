@@ -21,7 +21,7 @@ export default function Cart({ navigation }) {
 
   if (cart?.length === 0) {
     return (
-      <View style={styles.screen}>
+      <View style={{ ...styles.screen, flex: 1 }}>
         <DefaultText>Nothing in cart.</DefaultText>
       </View>
     );
@@ -45,7 +45,6 @@ export default function Cart({ navigation }) {
 
 const styles = StyleSheet.create({
   screen: {
-    // flex: 1,
     justifyContent: "center",
     alignItems: "center",
     marginHorizontal: 12,

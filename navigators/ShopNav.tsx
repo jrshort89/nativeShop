@@ -1,5 +1,5 @@
 import React from "react";
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer, StackActions } from "@react-navigation/native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -14,7 +14,7 @@ const options = {
 };
 
 const stackOptions = {
-  headerTitleStyle: { fontFamily: "Bangers_400Regular", fontSize: 22 },
+  headerTitleStyle: { fontFamily: "Bangers_400Regular", fontSize: 22, flex: 1 },
 };
 
 const HomeNav = () => {
@@ -27,6 +27,19 @@ const HomeNav = () => {
         component={ItemDetail}
         options={stackOptions}
       />
+      <Stack.Screen
+        name="Cart"
+        component={Cart}
+        options={{ ...stackOptions, headerTitle: "Cart" }}
+      />
+    </Stack.Navigator>
+  );
+};
+
+const CartNav = () => {
+  const Stack = createStackNavigator();
+  return (
+    <Stack.Navigator>
       <Stack.Screen name="Cart" component={Cart} options={stackOptions} />
     </Stack.Navigator>
   );
@@ -38,17 +51,19 @@ const ShopNav = () => {
     <NavigationContainer>
       <Drawer.Navigator
         drawerContentOptions={{ labelStyle: options }}
-        screenOptions={{ headerStyle: { flex: 1 } }}
+        screenOptions={{
+          headerStyle: { flex: 1, height: "100%", width: "100%" },
+        }}
       >
         <Drawer.Screen
           name={"Home"}
           component={HomeNav}
-          options={{ headerTitle: "home" }}
+          options={stackOptions}
         />
         <Drawer.Screen
           name={"Cart"}
-          component={Cart}
-          options={{ headerTitle: "cart" }}
+          component={CartNav}
+          options={stackOptions}
         />
       </Drawer.Navigator>
     </NavigationContainer>
