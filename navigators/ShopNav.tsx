@@ -6,6 +6,9 @@ import Home from "../screens/HomeScreen";
 import ItemDetail from "../components/ItemDetail";
 import { HomeParamList } from "./HomeParamList";
 import Cart from "../components/Cart";
+import EditScreen from "../screens/EditScreen";
+import { CartParamList } from "./CartParams";
+import ProductForm from "../screens/ProductForm";
 
 const options = {
   fontFamily: "Bangers_400Regular",
@@ -36,11 +39,27 @@ const HomeNav = () => {
 };
 
 const CartNav = () => {
-  const Stack = createStackNavigator();
+  const Stack = createStackNavigator<CartParamList>();
   return (
     <Stack.Navigator>
       <Stack.Screen name="Cart" component={Cart} options={stackOptions} />
       <Stack.Screen name="Home" component={HomeNav} options={stackOptions} />
+    </Stack.Navigator>
+  );
+};
+
+const EditNav = () => {
+  const Stack = createStackNavigator<HomeParamList>();
+  return (
+    <Stack.Navigator>
+      <Stack.Screen component={EditScreen} name="Edit" options={stackOptions} />
+      <Stack.Screen name="Cart" component={Cart} options={stackOptions} />
+      <Stack.Screen name="Home" component={HomeNav} options={stackOptions} />
+      <Stack.Screen
+        name="Product Form"
+        component={ProductForm}
+        options={stackOptions}
+      />
     </Stack.Navigator>
   );
 };
@@ -65,6 +84,7 @@ const DrawerNav = () => {
           component={CartNav}
           options={stackOptions}
         />
+        <Drawer.Screen name="Edit" component={EditNav} options={stackOptions} />
       </Drawer.Navigator>
     </NavigationContainer>
   );

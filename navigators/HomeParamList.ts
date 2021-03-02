@@ -16,6 +16,7 @@ export type HomeParamList = {
   "Item Detail": undefined;
   Cart: undefined;
   toggleDrawer: undefined;
+  Edit: undefined;
 };
 
 export type HomeNavProps<T extends keyof HomeParamList> = {

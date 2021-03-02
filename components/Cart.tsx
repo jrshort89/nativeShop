@@ -30,7 +30,7 @@ export default function Cart() {
       );
     },
   });
-  const cart = useSelector((state: CartState) => state.cart);
+  const cart = useSelector((state: CartState) => state.cart.cart);
   let mappedCart;
   mappedCart = (item: CartItem) => {
     return <CartItemPreview navigation={navigation} item={item} />;
