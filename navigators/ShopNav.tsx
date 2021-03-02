@@ -1,8 +1,7 @@
 import React from "react";
-import { NavigationContainer, StackActions } from "@react-navigation/native";
+import { NavigationContainer } from "@react-navigation/native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { createStackNavigator } from "@react-navigation/stack";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Home from "../screens/HomeScreen";
 import ItemDetail from "../components/ItemDetail";
 import { HomeParamList } from "./HomeParamList";
@@ -20,7 +19,7 @@ const stackOptions = {
 const HomeNav = () => {
   const Stack = createStackNavigator<HomeParamList>();
   return (
-    <Stack.Navigator>
+    <Stack.Navigator initialRouteName="Home">
       <Stack.Screen name="Home" component={Home} options={stackOptions} />
       <Stack.Screen
         name="Item Detail"
@@ -41,11 +40,12 @@ const CartNav = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen name="Cart" component={Cart} options={stackOptions} />
+      <Stack.Screen name="Home" component={HomeNav} options={stackOptions} />
     </Stack.Navigator>
   );
 };
 
-const ShopNav = () => {
+const DrawerNav = () => {
   const Drawer = createDrawerNavigator<HomeParamList>();
   return (
     <NavigationContainer>
@@ -70,22 +70,4 @@ const ShopNav = () => {
   );
 };
 
-const RootStack = () => {
-  const Stack = createStackNavigator<HomeParamList>();
-  return (
-    <Stack.Navigator>
-      <Stack.Screen name="Home" component={Home} />
-    </Stack.Navigator>
-  );
-};
-const ItemDetailNav = () => {
-  const Tab = createBottomTabNavigator<HomeParamList>();
-  return (
-    <Tab.Navigator tabBarOptions={{ labelStyle: options }}>
-      <Tab.Screen name="Home" component={Home} />
-      <Tab.Screen name="Item Detail" component={ItemDetail} />
-    </Tab.Navigator>
-  );
-};
-
-export default ShopNav;
+export default DrawerNav;

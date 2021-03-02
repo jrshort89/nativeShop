@@ -1,12 +1,14 @@
 import React from "react";
-import { View, StyleSheet, Button, Image, Alert } from "react-native";
+import { View, StyleSheet, Image } from "react-native";
 import DefaultText from "./DefaultText";
 import { useDispatch } from "react-redux";
 import * as actionTypes from "../redux/actions/cartActions";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 export default function ItemDetail(props: any) {
   const { title, price, description, imageUrl } = props.route.params;
   const dispatch = useDispatch();
+
   return (
     <View style={styles.screen}>
       <DefaultText style={styles.text}>{title}</DefaultText>
@@ -18,12 +20,15 @@ export default function ItemDetail(props: any) {
         {"\n"}
         <DefaultText>{description}</DefaultText>
       </DefaultText>
-      <Button
+      <TouchableOpacity
         onPress={() =>
           dispatch(actionTypes.addItemToCart(props.route.params, 1))
         }
-        title="Purchase"
-      />
+      >
+        <DefaultText style={{ color: "rgb(0, 122, 255)" }}>
+          Purchase
+        </DefaultText>
+      </TouchableOpacity>
     </View>
   );
 }

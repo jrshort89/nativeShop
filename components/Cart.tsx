@@ -1,20 +1,43 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
-import { FlatList } from "react-native-gesture-handler";
+import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 import { useSelector } from "react-redux";
 import CartItem from "../models/cart-item";
 import CartItemPreview from "./CartItemPreview";
 import DefaultText from "./DefaultText";
+import { Ionicons } from "@expo/vector-icons";
+import { CartState } from "../types/Cart";
+import { useNavigation } from "@react-navigation/native";
+import { DrawerNavigationProp } from "@react-navigation/drawer";
 
-export default function Cart({ navigation }) {
-  const cart = useSelector((state) => state.cart);
+type Custom = {
+  toggleDrawer(): void;
+};
+
+export default function Cart() {
+  const navigation = useNavigation<DrawerNavigationProp<Custom>>();
+  navigation.setOptions({
+    headerLeft: () => {
+      return (
+        <TouchableOpacity onPress={() => navigation.toggleDrawer()}>
+          <Ionicons
+            style={{ padding: 10 }}
+            name="ios-menu"
+            size={25}
+            color="rgb(0, 122, 255)"
+          />
+        </TouchableOpacity>
+      );
+    },
+  });
+  const cart = useSelector((state: CartState) => state.cart);
   let mappedCart;
   mappedCart = (item: CartItem) => {
     return <CartItemPreview navigation={navigation} item={item} />;
   };
 
   const cartTotal = cart
-    .reduce((a, b) => {
+    .reduce((a: number, b: CartItem) => {
       return a + b.sum;
     }, 0)
     .toFixed(2);
