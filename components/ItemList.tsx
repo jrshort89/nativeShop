@@ -1,10 +1,12 @@
 import React from "react";
 import { FlatList, StyleSheet, View } from "react-native";
 import ItemCard from "./ItemCard";
-import dummyData from "../data/dummy-data";
 import Product from "../models/product";
+import { useSelector } from "react-redux";
 
 export default function ItemList(props: any) {
+  const products = useSelector((state) => state.product.products);
+
   const itemList = (data: any) => {
     return (
       <ItemCard
@@ -21,7 +23,7 @@ export default function ItemList(props: any) {
     <View style={styles.screen}>
       <FlatList
         keyExtractor={(item: Product, index: number) => item.id}
-        data={dummyData}
+        data={products}
         renderItem={itemList}
         style={{ width: "100%" }}
         numColumns={2}

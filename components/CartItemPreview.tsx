@@ -6,12 +6,11 @@ import {
   TouchableOpacity,
   Image,
 } from "react-native";
-import data from "../data/dummy-data";
 import CartItem from "../models/cart-item";
 import DefaultText from "./DefaultText";
 import { Feather } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   addItemToCart,
   removeItemFromCart,
@@ -26,6 +25,7 @@ export default function CartItemPreview<CardItemPreviewProps>({
   item,
   navigation,
 }) {
+  const products = useSelector((state) => state.product.products);
   const [showDetail, setShowDetail] = useState(false);
   const dispatch = useDispatch();
   item = item.item;
@@ -36,9 +36,10 @@ export default function CartItemPreview<CardItemPreviewProps>({
       : Dimensions.get("window").height / 8,
   };
 
-  const productDetail: Product = data?.find(
-    (product) => product.title === item.productTitle
-  )!;
+  const productDetail: Product = products?.find((product) => {
+    console.log("this is what I am looking fors", item);
+    return product.title === item.productTitle;
+  })!;
 
   const detailView = showDetail ? (
     <View style={{ overflow: "hidden", height: "70%" }}>

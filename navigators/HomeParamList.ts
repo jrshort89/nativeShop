@@ -2,6 +2,7 @@ import { RouteProp } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { DrawerNavigationProp } from "@react-navigation/drawer";
 import { StackScreenProps } from "@react-navigation/stack";
+import { DefaultRootState } from "react-redux";
 
 type RootStackParamList = {
   Home: undefined;
@@ -17,6 +18,7 @@ export type HomeParamList = {
   Cart: undefined;
   toggleDrawer: undefined;
   Edit: undefined;
+  "New Product": undefined;
 };
 
 export type HomeNavProps<T extends keyof HomeParamList> = {

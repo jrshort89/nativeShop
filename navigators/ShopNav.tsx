@@ -52,7 +52,7 @@ const EditNav = () => {
   const Stack = createStackNavigator<HomeParamList>();
   return (
     <Stack.Navigator>
-      <Stack.Screen component={EditScreen} name="Edit" options={stackOptions} />
+      <Stack.Screen name="Edit" component={EditScreen} options={stackOptions} />
       <Stack.Screen name="Cart" component={Cart} options={stackOptions} />
       <Stack.Screen name="Home" component={HomeNav} options={stackOptions} />
       <Stack.Screen
@@ -85,6 +85,11 @@ const DrawerNav = () => {
           options={stackOptions}
         />
         <Drawer.Screen name="Edit" component={EditNav} options={stackOptions} />
+        <Drawer.Screen
+          name="New Product"
+          component={ProductForm}
+          options={stackOptions}
+        />
       </Drawer.Navigator>
     </NavigationContainer>
   );

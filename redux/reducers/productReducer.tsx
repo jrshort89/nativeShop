@@ -12,7 +12,15 @@ const productReducer = (
 ): ProductsState => {
   switch (action.type) {
     case EDIT_PRODUCT:
-      console.log("product edited", action.product);
+      const productIndex = state.products.findIndex(
+        (prod) => prod.id === action.product.id
+      );
+      if (productIndex < 0) {
+        return { ...state, products: [...state.products, action.product] };
+      } else {
+        state.products[productIndex] = action.product;
+        return { ...state, products: [...state.products] };
+      }
     default:
       return state;
   }

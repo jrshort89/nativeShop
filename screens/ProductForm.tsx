@@ -12,14 +12,18 @@ export interface ProductFormProps {
 
 export default function ProductForm<ProductFormProps>({ route }) {
   const dispatch = useDispatch();
-  const {
-    id,
-    ownerId,
-    title,
-    description,
-    imageUrl,
-    price,
-  } = route.params.product;
+  const { id, ownerId, title, description, imageUrl, price } =
+    route.params !== undefined
+      ? route.params.product
+      : {
+          id: "",
+          ownerId: "",
+          title: "",
+          description: "",
+          imageUrl: "",
+          price: null,
+        };
+
   const [productTitle, setProductTitle] = useState(title);
   const [productDescription, setProductDescription] = useState(description);
   const [productImage, setProductImage] = useState(imageUrl);
@@ -30,14 +34,11 @@ export default function ProductForm<ProductFormProps>({ route }) {
       value={productPrice}
       onChangeText={(text) => setProductPrice(text)}
       keyboardType="decimal-pad"
+      placeholder="price"
     />
   );
   const productPriceField =
-    price === undefined ? (
-      priceInput
-    ) : (
-      <DefaultText>${productPrice}</DefaultText>
-    );
+    price === null ? priceInput : <DefaultText>${productPrice}</DefaultText>;
 
   const onSubmitHandler = () => {
     const newProd = new Product(
@@ -61,13 +62,16 @@ export default function ProductForm<ProductFormProps>({ route }) {
         value={productImage}
         onChangeText={(text) => setProductImage(text)}
         autoCorrect={false}
+        placeholder="Image URL"
       />
       <TextInput
         style={styles.input}
         value={productTitle}
         onChangeText={(text) => setProductTitle(text)}
         autoCorrect
+        placeholder="Title"
       />
+      <DefaultText>Description</DefaultText>
       <TextInput
         multiline
         numberOfLines={4}
@@ -95,7 +99,6 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   input: {
-    // height: "10%",
     margin: 12,
     width: "80%",
     borderBottomWidth: 1,
@@ -113,6 +116,7 @@ const styles = StyleSheet.create({
   imageContainer: {
     height: Dimensions.get("window").height / 2.5,
     width: "100%",
+    marginTop: 20,
   },
   image: {
     height: "90%",
