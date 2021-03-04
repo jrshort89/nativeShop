@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useReducer } from "react";
 import { View, StyleSheet, Image, Dimensions, Button } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 import { useDispatch } from "react-redux";
@@ -10,8 +10,41 @@ export interface ProductFormProps {
   route: { params: { product: Product } };
 }
 
+const UPDATE_PRODUCT = "UPDATE_PRODUCT";
+
+type formActions = { type: typeof UPDATE_PRODUCT; key: string; text: string };
+
+type State = {
+  title: string;
+  description: string;
+  imageUrl: string;
+  price: number;
+};
+
+const formReducer = (state: State, action: formActions): State => {
+  if (action.type === UPDATE_PRODUCT) {
+    return {
+      ...state,
+      [action.key]: action.text,
+    };
+  }
+  return state;
+};
+
 export default function ProductForm<ProductFormProps>({ route }) {
   const dispatch = useDispatch();
+  const [formState, reducerDispatch] = useReducer(formReducer, {
+    title: route.params !== undefined ? route.params.product.title : "",
+    description:
+      route.params !== undefined ? route.params.product.description : "",
+    imageUrl: route.params !== undefined ? route.params.product.imageUrl : "",
+    price: route.params !== undefined ? route.params.product.price : 0,
+  });
+
+  const onChangeHandler = (keyName: string, text: string) => {
+    reducerDispatch({ type: UPDATE_PRODUCT, key: keyName, text: text });
+  };
+
   const { id, ownerId, title, description, imageUrl, price } =
     route.params !== undefined
       ? route.params.product
