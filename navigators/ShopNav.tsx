@@ -29,11 +29,6 @@ const HomeNav = () => {
         component={ItemDetail}
         options={stackOptions}
       />
-      <Stack.Screen
-        name="Cart"
-        component={Cart}
-        options={{ ...stackOptions, headerTitle: "Cart" }}
-      />
     </Stack.Navigator>
   );
 };
@@ -48,6 +43,19 @@ const CartNav = () => {
   );
 };
 
+const NewProd = () => {
+  const Stack = createStackNavigator<HomeParamList>();
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="New Product"
+        component={ProductForm}
+        options={stackOptions}
+      />
+    </Stack.Navigator>
+  );
+};
+
 const EditNav = () => {
   const Stack = createStackNavigator<HomeParamList>();
   return (
@@ -55,11 +63,11 @@ const EditNav = () => {
       <Stack.Screen name="Edit" component={EditScreen} options={stackOptions} />
       <Stack.Screen name="Cart" component={Cart} options={stackOptions} />
       <Stack.Screen name="Home" component={HomeNav} options={stackOptions} />
-      <Stack.Screen
+      {/* <Stack.Screen
         name="Product Form"
         component={ProductForm}
         options={stackOptions}
-      />
+      /> */}
     </Stack.Navigator>
   );
 };
@@ -87,10 +95,15 @@ const DrawerNav = () => {
         <Drawer.Screen name="Edit" component={EditNav} options={stackOptions} />
         <Drawer.Screen
           name="New Product"
-          component={ProductForm}
+          component={NewProd}
           options={stackOptions}
         />
       </Drawer.Navigator>
+      <Drawer.Screen
+        name="Item Detail"
+        component={ItemDetail}
+        options={stackOptions}
+      />
     </NavigationContainer>
   );
 };

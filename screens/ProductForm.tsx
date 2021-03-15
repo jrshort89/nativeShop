@@ -1,10 +1,11 @@
 import React, { useState, useReducer } from "react";
 import { View, StyleSheet, Image, Dimensions, Button } from "react-native";
-import { TextInput } from "react-native-gesture-handler";
+import { TextInput, TouchableOpacity } from "react-native-gesture-handler";
 import { useDispatch } from "react-redux";
 import DefaultText from "../components/DefaultText";
 import Product from "../models/product";
 import { editProduct } from "../redux/actions/productActions";
+import { Ionicons } from "@expo/vector-icons";
 
 export interface ProductFormProps {
   route: { params: { product: Product } };
@@ -31,14 +32,47 @@ const formReducer = (state: State, action: formActions): State => {
   return state;
 };
 
-export default function ProductForm<ProductFormProps>({ route }) {
+export default function ProductForm<ProductFormProps>(props: any) {
+  props.navigation.setOptions({
+    headerRight: () => {
+      return (
+        <TouchableOpacity onPress={() => props.navigation.navigate("Cart")}>
+          <Ionicons
+            style={{ padding: 10 }}
+            name="cart"
+            size={25}
+            color="rgb(0, 122, 255)"
+          />
+        </TouchableOpacity>
+      );
+    },
+    headerLeft: () => {
+      return (
+        <TouchableOpacity onPress={() => props.navigation.toggleDrawer()}>
+          <Ionicons
+            style={{ padding: 10 }}
+            name="ios-menu"
+            size={25}
+            color="rgb(0, 122, 255)"
+          />
+        </TouchableOpacity>
+      );
+    },
+  });
   const dispatch = useDispatch();
   const [formState, reducerDispatch] = useReducer(formReducer, {
-    title: route.params !== undefined ? route.params.product.title : "",
+    title:
+      props.route.params !== undefined ? props.route.params.product.title : "",
     description:
-      route.params !== undefined ? route.params.product.description : "",
-    imageUrl: route.params !== undefined ? route.params.product.imageUrl : "",
-    price: route.params !== undefined ? route.params.product.price : 0,
+      props.route.params !== undefined
+        ? props.route.params.product.description
+        : "",
+    imageUrl:
+      props.route.params !== undefined
+        ? props.route.params.product.imageUrl
+        : "",
+    price:
+      props.route.params !== undefined ? props.route.params.product.price : 0,
   });
 
   const onChangeHandler = (keyName: string, text: string) => {
@@ -46,8 +80,8 @@ export default function ProductForm<ProductFormProps>({ route }) {
   };
 
   const { id, ownerId, title, description, imageUrl, price } =
-    route.params !== undefined
-      ? route.params.product
+    props.route.params !== undefined
+      ? props.route.params.product
       : {
           id: "",
           ownerId: "",

@@ -1,17 +1,32 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
-import { FlatList } from "react-native-gesture-handler";
+import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 import { useSelector } from "react-redux";
 import ItemDetail from "../components/ItemDetail";
+import { Ionicons } from "@expo/vector-icons";
 
-export default function EditScreen() {
+export default function EditScreen(props: any) {
+  props.navigation.setOptions({
+    headerLeft: () => {
+      return (
+        <TouchableOpacity onPress={() => props.navigation.toggleDrawer()}>
+          <Ionicons
+            style={{ padding: 10 }}
+            name="ios-menu"
+            size={25}
+            color="rgb(0, 122, 255)"
+          />
+        </TouchableOpacity>
+      );
+    },
+  });
   const products = useSelector((state) => state.product.products);
   return (
     <View style={{ marginHorizontal: 10, flex: 1 }}>
       <View style={styles.screen}>
         <FlatList
           data={products}
-          renderItem={({ item }) => <ItemDetail item={item} />}
+          renderItem={({ item }) => <ItemDetail {...props} item={item} />}
         />
       </View>
     </View>
