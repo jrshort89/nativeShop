@@ -5,8 +5,24 @@ import { useDispatch } from "react-redux";
 import * as actionTypes from "../redux/actions/cartActions";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
+import { Ionicons } from "@expo/vector-icons";
 
 export default function ItemDetail(props: any) {
+  props.navigation.setOptions({
+    headerRight: () => {
+      return (
+        <TouchableOpacity onPress={() => navigation.navigate("Cart")}>
+          <Ionicons
+            style={{ padding: 10 }}
+            name="cart"
+            size={25}
+            color="rgb(0, 122, 255)"
+          />
+        </TouchableOpacity>
+      );
+    },
+  });
+
   const product =
     props.route?.params === undefined ? props.item : props.route.params;
   const { title, price, description, imageUrl } = product;
