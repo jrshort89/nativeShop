@@ -32,7 +32,7 @@ export default function Home({ navigation }: HomeNavProps<"Home">) {
     },
   });
   return (
-    <View style={styles.screen}>
+    <View style={styles.screen} testID="homeScreen">
       <View
         style={{
           flex: 1,
