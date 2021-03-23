@@ -63,11 +63,6 @@ const EditNav = () => {
       <Stack.Screen name="Edit" component={EditScreen} options={stackOptions} />
       <Stack.Screen name="Cart" component={Cart} options={stackOptions} />
       <Stack.Screen name="Home" component={HomeNav} options={stackOptions} />
-      {/* <Stack.Screen
-        name="Product Form"
-        component={ProductForm}
-        options={stackOptions}
-      /> */}
     </Stack.Navigator>
   );
 };

@@ -1,7 +1,7 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
 import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
-import { useSelector } from "react-redux";
+import { DefaultRootState, useSelector } from "react-redux";
 import ItemDetail from "../components/ItemDetail";
 import { Ionicons } from "@expo/vector-icons";
 
@@ -20,7 +20,9 @@ export default function EditScreen(props: any) {
       );
     },
   });
-  const products = useSelector((state) => state.product.products);
+  const products = useSelector(
+    (state: DefaultRootState) => state.product.products
+  );
   return (
     <View style={{ marginHorizontal: 10, flex: 1 }}>
       <View style={styles.screen}>

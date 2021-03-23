@@ -8,18 +8,16 @@ import DefaultText from "./DefaultText";
 import { Ionicons } from "@expo/vector-icons";
 import { CartState } from "../types/Cart";
 import { useNavigation } from "@react-navigation/native";
-import { DrawerNavigationProp } from "@react-navigation/drawer";
-
-type Custom = {
-  toggleDrawer(): void;
-};
+import { DrawerActions } from "@react-navigation/native";
 
 export default function Cart() {
-  const navigation = useNavigation<DrawerNavigationProp<Custom>>();
+  const navigation = useNavigation();
   navigation.setOptions({
     headerLeft: () => {
       return (
-        <TouchableOpacity onPress={() => navigation.toggleDrawer()}>
+        <TouchableOpacity
+          onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}
+        >
           <Ionicons
             style={{ padding: 10 }}
             name="ios-menu"

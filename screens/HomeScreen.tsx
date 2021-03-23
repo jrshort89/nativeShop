@@ -3,6 +3,7 @@ import { View, StyleSheet, TouchableOpacity } from "react-native";
 import ItemList from "../components/ItemList";
 import { HomeNavProps } from "../navigators/HomeParamList";
 import { Ionicons } from "@expo/vector-icons";
+import { DrawerActions } from "@react-navigation/native";
 
 export default function Home({ navigation }: HomeNavProps<"Home">) {
   navigation.setOptions({
@@ -20,7 +21,9 @@ export default function Home({ navigation }: HomeNavProps<"Home">) {
     },
     headerLeft: () => {
       return (
-        <TouchableOpacity onPress={() => navigation.toggleDrawer()}>
+        <TouchableOpacity
+          onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}
+        >
           <Ionicons
             style={{ padding: 10 }}
             name="ios-menu"
