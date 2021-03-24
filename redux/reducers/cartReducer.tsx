@@ -29,7 +29,8 @@ const cartReducer = (
         return { ...state, cart: [...state.cart] };
       } else {
         const newCartItem = new CartItem(quantity, price, title, sum);
-        return { ...state, cart: [...state.cart, newCartItem] };
+        state.cart.push(newCartItem);
+        return { ...state, ...state.cart }; // why does this work???
       }
     case REMOVE_ITEM_FROM_CART:
       const cartItem = state.cart.findIndex(
@@ -37,7 +38,7 @@ const cartReducer = (
       );
       if (state.cart[cartItem].quantity === 0) {
         state.cart.splice(cartItem, 1);
-        return { ...state, cart: [...state.cart] };
+        return { ...state, ...state.cart] };
       }
       state.cart[cartItem].quantity -= action.removeQuantity;
       state.cart[cartItem].sum = +(

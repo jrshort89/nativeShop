@@ -29,8 +29,8 @@ export default function Cart() {
     },
   });
   const cart = useSelector((state: CartState) => state.cart.cart);
-  let mappedCart;
-  mappedCart = (item: CartItem) => {
+
+  let mappedCart = (item: CartItem): JSX.Element => {
     return <CartItemPreview navigation={navigation} item={item} />;
   };
 
@@ -56,8 +56,8 @@ export default function Cart() {
       <View style={styles.list}>
         <FlatList
           data={cart}
-          renderItem={mappedCart}
-          keyExtractor={(item) => item.productTitle}
+          renderItem={(): any => mappedCart} // remove any and try and solve that bug
+          keyExtractor={(item: CartItem) => item.productTitle}
         />
       </View>
     </View>
